@@ -74,11 +74,11 @@ def registration(request):
         )
     
         login(request, user)
-        data = {"userName":username, "status","Authenticated"}
+        data = {"userName":username, "status":"Authenticated"}
         return JsonResponse(data)
     
     else:
-        data = {"userName":username, "status","Already Registered"}
+        data = {"userName":username, "status":"Already Registered"}
         return JsonResponse(data) 
 
 # # Update the `get_dealerships` view to render the index page with
