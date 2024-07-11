@@ -1,8 +1,8 @@
 # Uncomment the following imports before adding the Model code
 
-# from django.db import models
-# from django.utils.timezone import now
-# from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+from django.utils.timezone import now
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 # Create your models here.
@@ -12,6 +12,14 @@
 # - Description
 # - Any other fields you would like to include in car make model
 # - __str__ method to print a car make object
+
+class CarMake(models.Model):
+    name = models.CharField(null=False, max_length=30)
+    description = models.TextField()
+
+    def __str__(self):
+        return "Name: " + self.name + "," + \
+               "Description: " + self.description
 
 
 # <HINT> Create a Car Model model `class CarModel(models.Model):`:
@@ -23,3 +31,23 @@
 # - Year (IntegerField) with min value 2015 and max value 2023
 # - Any other fields you would like to include in car model
 # - __str__ method to print a car make object
+
+class CarModel(models.Model):
+    SEDAN = "sedan"
+    SUV = "suv"
+    WAGON = "wagon"
+    TYPE_CHOICE = [
+        (SEDAN, "Sedan"),
+        (SUV, "Suv"),
+        (WAGON, "Wagon")
+    ]
+
+    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
+    dealer_id = models.IntegerField()
+    name = models.CharField(null=False, max_length=30)
+    car_type = models.CharField(max_length=5, choices=TYPE_CHOICE)
+    year = models.DateField(default=2024, validators = [MaxValueValidator(2024)])
+
+    def __str__(self):
+        return "CarMake: " + self.car_make + "," + \
+               "Name: " + self.name
