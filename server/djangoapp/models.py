@@ -18,8 +18,7 @@ class CarMake(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return "Name: " + self.name + "," + \
-               "Description: " + self.description
+        return self.name
 
 
 # <HINT> Create a Car Model model `class CarModel(models.Model):`:
@@ -33,21 +32,18 @@ class CarMake(models.Model):
 # - __str__ method to print a car make object
 
 class CarModel(models.Model):
-    SEDAN = "sedan"
-    SUV = "suv"
-    WAGON = "wagon"
-    TYPE_CHOICE = [
-        (SEDAN, "Sedan"),
-        (SUV, "Suv"),
-        (WAGON, "Wagon")
+    
+    CAR_TYPE = [
+        ('SEDAN', "Sedan"),
+        ('SUV', "SUV"),
+        ('WAGON', "Wagon")
     ]
 
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
-    dealer_id = models.IntegerField()
     name = models.CharField(null=False, max_length=30)
-    car_type = models.CharField(max_length=5, choices=TYPE_CHOICE)
-    year = models.DateField(default=2024, validators = [MaxValueValidator(2024)])
+    car_type = models.CharField(max_length=5, choices=CAR_TYPE)
+    year = models.IntegerField(default=2024, validators = [MaxValueValidator(2024)])
+    dealer_id = models.IntegerField(default=1)
 
     def __str__(self):
-        return "CarMake: " + self.car_make + "," + \
-               "Name: " + self.name
+        return self.name
