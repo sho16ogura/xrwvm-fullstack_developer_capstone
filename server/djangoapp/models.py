@@ -3,13 +3,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator #, MinValueValidator
 
-# Create your models here.
-
-# <HINT> Create a Car Make model `class CarMake(models.Model)`:
-# - Name
-# - Description
-# - Any other fields you would like to include in car make model
-# - __str__ method to print a car make object
 
 class CarMake(models.Model):
     name = models.CharField(null=False, max_length=30)
@@ -29,7 +22,7 @@ class CarMake(models.Model):
 # - Any other fields you would like to include in car model
 # - __str__ method to print a car make object
 class CarModel(models.Model):
-    
+
     CAR_TYPE = [
         ('SEDAN', "Sedan"),
         ('SUV', "SUV"),
@@ -40,7 +33,7 @@ class CarModel(models.Model):
     name = models.CharField(null=False, max_length=30)
     car_type = models.CharField(max_length=5, choices=CAR_TYPE)
     year = models.IntegerField(default=2024, 
-        validators=[MaxValueValidator(2024)])
+                                validators=[MaxValueValidator(2024)])
     dealer_id = models.IntegerField(default=1)
 
     def __str__(self):
