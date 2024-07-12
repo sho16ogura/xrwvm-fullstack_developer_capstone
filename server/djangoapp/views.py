@@ -1,6 +1,5 @@
 # Uncomment the required imports before adding the code
 
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 
@@ -64,7 +63,7 @@ def registration(request):
 
     if not username_exist:
         user = User.objects.create_user(
-            username=username, 
+            username=username,
             first_name=first_name,
             last_name=last_name,
             password=password,
